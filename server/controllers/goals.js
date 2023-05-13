@@ -1,11 +1,13 @@
 const handleAsync = require('express-async-handler');
+const Goals = require('../models/goals');
 
 // @desc    Get goals
 // @route   GET /api/goals
 // @access  Private
 
 const getGoals = handleAsync(async (req, res) => {
-	res.status(200).json({ message: 'All goals served.' });
+  const goals = await Goals.find();
+  res.status(200).json(goals);
 });
 
 // @desc    Get goal
@@ -13,7 +15,13 @@ const getGoals = handleAsync(async (req, res) => {
 // @access  Private
 
 const getGoal = handleAsync(async (req, res) => {
-	res.status(200).json({ message: `Goal ${req.params.id} served.` });
+  const goal = await Goals.findById(req.params.id);
+  // Check for the selected goal
+  if (!goal) {
+    res.status(400);
+    throw new Error('The selected goal is not found.');
+  }
+  res.status(200).json(goal);
 });
 
 // @desc    Set goal
@@ -21,11 +29,18 @@ const getGoal = handleAsync(async (req, res) => {
 // @access  Private
 
 const setGoal = handleAsync(async (req, res) => {
-	if (!req.body.text) {
-		res.status(400);
-		throw new Error('Please add text');
-	}
-	res.status(201).json({ message: 'Goal set.' });
+  // Check for required parameters
+  if (!req.body.title) {
+    res.status(400);
+    throw new Error('Please add text');
+  }
+
+  const goal = await Goals.create({
+    title: req.body.title,
+    description: req.body.description,
+  });
+
+  res.status(201).json(goal);
 });
 
 // @desc    Update goal
@@ -33,7 +48,16 @@ const setGoal = handleAsync(async (req, res) => {
 // @access  Private
 
 const updateGoal = handleAsync(async (req, res) => {
-	res.status(200).json({ message: `Goal ${req.params.id} updated.` });
+  const goal = await Goals.findById(req.params.id);
+
+  // Check for the selected goal
+  if (!goal) {
+    res.status(400);
+    throw new Error('The selected goal is not found.');
+  }
+
+  const updatedGoal = await Goals.findByIdAndUpdate(req.params.id, req.body);
+  res.status(200).json(updatedGoal);
 });
 
 // @desc    Delete goal
@@ -41,7 +65,16 @@ const updateGoal = handleAsync(async (req, res) => {
 // @access  Private
 
 const deleteGoal = handleAsync(async (req, res) => {
-	res.status(200).json({ message: `Goal ${req.params.id} deleted.` });
+  const goal = await Goals.findById(req.params.id);
+
+  // Check for the selected goal
+  if (!goal) {
+    res.status(400);
+    throw new Error('The selected goal is not found.');
+  }
+
+  await goal.deleteOne();
+  res.status(200).json({ id: req.params.id });
 });
 
 // @desc    Delete goals
@@ -49,14 +82,17 @@ const deleteGoal = handleAsync(async (req, res) => {
 // @access  Private
 
 const deleteGoals = handleAsync(async (req, res) => {
-	res.status(200).json({ message: 'All goals deleted.' });
+  const goals = await Goals.deleteMany();
+
+  const deleteGoals = await Goals.find();
+  res.status(200).json(deleteGoals);
 });
 
 module.exports = {
-	getGoals,
-	getGoal,
-	setGoal,
-	updateGoal,
-	deleteGoal,
-	deleteGoals,
+  getGoals,
+  getGoal,
+  setGoal,
+  updateGoal,
+  deleteGoal,
+  deleteGoals,
 };
