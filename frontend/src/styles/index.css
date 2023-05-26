@@ -79,7 +79,6 @@ h3 {
 .heading {
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 50px;
   padding: 0 20px;
 }
 
@@ -87,9 +86,76 @@ h3 {
   color: #828282;
 }
 
+.register-page-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  transform: translateX(-1.78rem);
+}
+
+.login-page-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  transform: translateX(-1.78rem);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.register-form-row {
+  position: relative;
+}
+
+.register-form-row input {
+  border: 0.0625rem solid;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 2rem;
+}
+
+.register-form-input-icon {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.75rem;
+}
+
+.login-form-row {
+  position: relative;
+}
+
+.login-form-row input {
+  border: 0.0625rem solid;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 2rem;
+}
+
+.login-form-input-icon {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.75rem;
+}
+
 .goals {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -109,65 +175,41 @@ h3 {
   background: none;
 }
 
-.form,
-.content {
-  width: 70%;
-  margin: 0 auto;
-}
-
-.form-group {
-  margin-bottom: 10px;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  font-family: inherit;
-}
-
-.form-group label {
-  text-align: left;
-  display: block;
-  margin: 0 0 5px 3px;
-}
-
 .btn {
-  padding: 10px 20px;
-  border: 1px solid #000;
-  border-radius: 5px;
-  background: #000;
+  width: 100%;
+  padding: 0.625rem 1.25rem;
+  border: 0.0625rem solid #000;
+  border-radius: 0.375rem;
   color: #fff;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   text-align: center;
   appearance: button;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .btn svg {
   margin-right: 8px;
 }
 
-.btn-reverse {
-  background: #fff;
-  color: #000;
-}
-
-.btn-block {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
 .btn:hover {
   transform: scale(0.98);
+}
+
+.btn-submit {
+  border: 0.0625rem solid #5553ff;
+  background-color: #5553ff;
+  width: 100%;
+}
+
+.switch-form-link {
+  color: #5553ff;
+}
+
+.invalid-feedback {
+  display: inline-block;
+  text-align: left;
+  margin: 0;
 }
 
 .loadingSpinnerContainer {

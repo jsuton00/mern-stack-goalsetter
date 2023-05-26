@@ -13,14 +13,15 @@ const Header = () => {
         </div>
         <div className="header-nav">
           <div className="header-nav-item">
-            <Link to="/" className="header-nav-item-link">
+            <Link to="/login" className="header-nav-item-link">
               <FaSignInAlt />
-              Register
+              Login
             </Link>
           </div>
-          <div>
-            <Link to="/login" className="header-nav-item-link">
-              <FaUser /> Login
+          <div className="header-nav-item">
+            <Link to="/" className="header-nav-item-link">
+              <FaUser />
+              Register
             </Link>
           </div>
         </div>
