@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { validateRegisterForm } from '../utils/validateForm';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
 import { MdAlternateEmail, MdPassword } from 'react-icons/md';
+import { register, reset } from '../store/reducers/auth';
+import { validateRegisterForm } from '../utils/validateForm';
+import Loader from './Loader';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +19,26 @@ const RegisterForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState('');
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
   const { name, email, password, confirmPassword } = formData;
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate('/goals');
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     e.persist();
@@ -28,6 +51,13 @@ const RegisterForm = () => {
 
     if (Object.keys(errors).length === 0) {
       setIsSubmitted(true);
+
+      if (password !== confirmPassword) {
+        toast.error('Passwords do not match.');
+      } else {
+        const userData = { name, email, password };
+        dispatch(register(userData));
+      }
     } else {
       console.log(errors);
     }
@@ -39,6 +69,10 @@ const RegisterForm = () => {
       confirmPassword: '',
     });
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <form

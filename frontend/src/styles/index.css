@@ -60,7 +60,7 @@ h3 {
 .header-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -92,7 +92,7 @@ h3 {
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  transform: translateX(-1.78rem);
+  transform: translateX(-2.94rem);
 }
 
 .login-page-content {
@@ -101,7 +101,7 @@ h3 {
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  transform: translateX(-1.78rem);
+  transform: translateX(-2.94rem);
 }
 
 .form {
@@ -202,6 +202,11 @@ h3 {
   width: 100%;
 }
 
+.btn-logout {
+  color: #000;
+  font-weight: 700;
+}
+
 .switch-form-link {
   color: #5553ff;
 }
@@ -218,7 +223,6 @@ h3 {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   z-index: 5000;
   display: flex;
   justify-content: center;

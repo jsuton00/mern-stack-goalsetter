@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { validateLoginForm } from '../utils/validateForm';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { MdAlternateEmail, MdPassword } from 'react-icons/md';
+import Loader from './Loader';
+import { login, reset } from '../store/reducers/auth';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +16,26 @@ const LoginForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState('');
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
   const { email, password } = formData;
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate('/goals');
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     e.persist();
@@ -25,6 +48,9 @@ const LoginForm = () => {
 
     if (Object.keys(errors).length === 0) {
       setIsSubmitted(true);
+
+      const userData = { email, password };
+      dispatch(login(userData));
     } else {
       console.log(errors);
     }
@@ -34,6 +60,10 @@ const LoginForm = () => {
       password: '',
     });
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <form name="login-form" onSubmit={onSubmit} className="form login-form">
