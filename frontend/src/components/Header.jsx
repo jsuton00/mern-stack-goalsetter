@@ -10,7 +10,7 @@ const Header = () => {
 
   const { user } = useSelector((state) => state.auth);
 
-  const onNavigate = () => {
+  const onClick = () => {
     dispatch(logout);
     dispatch(reset);
     navigate('/');
@@ -27,13 +27,10 @@ const Header = () => {
         {user ? (
           <div className="header-nav">
             <div className="header-nav-item">
-              <Link
-                className="header-nav-item-link btn-logout"
-                onClick={onNavigate}
-              >
+              <button className="btn btn-logout" onClick={onClick}>
                 <FaSignOutAlt />
                 Logout
-              </Link>
+              </button>
             </div>
           </div>
         ) : (

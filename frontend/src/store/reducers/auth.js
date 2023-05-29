@@ -5,7 +5,7 @@ import authActions from '../actions/auth';
 const user = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
-  user: user ? user : '',
+  user: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -76,7 +76,7 @@ export const auth = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.payload;
-        state.user = '';
+        state.user = null;
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
@@ -91,7 +91,7 @@ export const auth = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.payload;
-        state.user = '';
+        state.user = null;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;

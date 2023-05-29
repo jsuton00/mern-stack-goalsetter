@@ -12,7 +12,6 @@ const App = () => {
   return (
     <>
       <Router>
-        <ToastContainer />
         <Header />
         <main className="main">
           <Routes>
@@ -22,6 +21,7 @@ const App = () => {
             <Route path="/goals/:id" element={<GoalDetailsPage />} />
           </Routes>
         </main>
+        <ToastContainer />
       </Router>
     </>
   );
