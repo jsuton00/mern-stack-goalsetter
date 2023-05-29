@@ -50,3 +50,13 @@ export const validateLoginForm = (values) => {
 
   return errors;
 };
+
+export const validateGoalsForm = (values) => {
+  let errors = {};
+
+  if (!values.title || !values.title.trim()) {
+    errors.title = 'No title! Please enter a goal title.';
+  }
+
+  return errors;
+};

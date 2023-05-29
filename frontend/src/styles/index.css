@@ -153,6 +153,44 @@ h3 {
   right: 0.75rem;
 }
 
+.goals-page-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.goals-input-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.goals-input {
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.5rem 2rem;
+}
+
+.goals-input-icon {
+  position: absolute;
+  top: 0.48rem;
+  right: 0.625rem;
+  border: none;
+  background-color: transparent;
+  font-weight: 700;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.goals-input-container .invalid-feedback {
+  text-align: center;
+  margin: 0 auto;
+}
+
 .goals {
   display: flex;
   flex-direction: column;
